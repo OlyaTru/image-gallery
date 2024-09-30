@@ -1,4 +1,4 @@
-let pageNumber = randomPage(50);
+let pageNumber = 1;
 let searchWord = "relax";
 
 const API_KEY = "1FdYHCM9eipd8iknsngmGyQ3568Wkzk-Htq3-quydjs";
@@ -7,21 +7,31 @@ const allCardsWrap = document.querySelector('.wrapper-main');
 const inputSearch = document.querySelector('.header-search input');
 const btnSearch = document.querySelector('.header-search button');
 
-inputSearch.focus();
+const pageCountCache = new Map();
 
-function getUrl(key, page, search) {
-    return `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=${pageNumber}&query=${searchWord}`;
+inputSearch.focus();
+getData(searchWord);
+
+function getUrl(page, search) {
+    return `https://api.unsplash.com/search/photos?client_id=${API_KEY}&page=${page}&query=${search}`;
 }
 
-async function getData(url) {
+async function getData(text) {
+    let maxPage = pageCountCache.get(text) ?? 1;
+    let page = randomPage(maxPage);
+    let url = getUrl(page, text);
+
     const res = await fetch(url);
+    if (res.status !== 200) {
+        alert(`Cannot retrieve data from server. Status: ${res.status}`);
+        return;
+    }
+
     const data = await res.json();
-    let lastPage = data.total_pages;
-    pageNumber = randomPage(lastPage);
+    pageCountCache.set(text, data.total_pages);
+
     showData(data);
 }
-
-getData(getUrl(API_KEY, pageNumber, searchWord));
 
 function showData(data) {
     allCardsWrap.innerHTML = '';
@@ -41,17 +51,19 @@ function showData(data) {
 inputSearch.addEventListener('keyup', (e) => {
     if(e.key === 'Enter') {
         searchWord = e.target.value;
-        getData(getUrl(API_KEY, pageNumber, searchWord));
+        getData(searchWord);
     }
 });
 
 btnSearch.addEventListener('click', () => {
     if(inputSearch.value) {
         searchWord = inputSearch.value;
-        getData(getUrl(API_KEY, pageNumber, searchWord));
+        getData(searchWord);
     }
-})
+});
 
 function randomPage(max) {
-    return Math.floor(Math.random() * max);
+    max = max > 30 ? 30 : max;
+    let random = Math.ceil(Math.random() * max);
+    return random !== 0 ? random : 1;
 }
