@@ -122,11 +122,11 @@ h1 {
 }
 
 .wrapper-footer > a > img {
-    width: 6rem;
+    width: 4rem;
 }
 
-.wrapper-footer > img {
-    width: 4rem;
+.wrapper-footer > a:first-child > img {
+    width: 7rem;
 }
 
 .wrapper-footer > p {
