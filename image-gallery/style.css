@@ -62,6 +62,11 @@ h1 {
     margin-right: 0.5rem;
 }
 
+input::-webkit-search-cancel-button {
+    cursor: pointer;
+    padding-right: 0.5rem;
+}
+
 .header-search button {
     height: 2rem;
     appearance: none;
