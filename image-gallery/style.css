@@ -140,3 +140,23 @@ input::-webkit-search-cancel-button {
     color: white;
     letter-spacing: 0.4rem;
 }
+
+@media (max-width: 900px) {
+    .wrapper-header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-logo {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .header-search {
+        align-items: center;
+        width: 100%;
+    }
+}
