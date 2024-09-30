@@ -81,7 +81,6 @@ h1 {
     box-shadow: 0 0 0 0.2rem white, 0 0 0 0.4rem #6f2232;
 }
 
-
 .wrapper-main {
     max-width: 95%;
     padding: 2rem;
@@ -111,4 +110,28 @@ h1 {
     border-radius: 7px;
 }
 
+.wrapper-footer {
+    width: 100%;
+    padding: 2rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5rem solid #6f2232;
+}
 
+.wrapper-footer > a > img {
+    width: 6rem;
+}
+
+.wrapper-footer > img {
+    width: 4rem;
+}
+
+.wrapper-footer > p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.4rem;
+}
